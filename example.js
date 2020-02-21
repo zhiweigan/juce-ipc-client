@@ -7,6 +7,7 @@ const options = {
   targetHost: '127.0.0.1',
   header: 0xf2b49e2c, 
   timeout: 3000, 
+  isUnixDomainSocket: false,
 };
 
 const client = new IpcClient(options);

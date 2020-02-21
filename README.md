@@ -20,14 +20,16 @@ const options = {
   targetHost: '127.0.0.1',
   header: 0xf2b49e2c, // default for connecting to a JUCE IPC
   timeout: 3000, 
+  isUnixDomainSocket: false,
 };
 ```
 | Key | Value |
 |---------|-------------|
 | `targetPort` | Target port |
-| `targetHost` | Target host |
+| `targetHost` | Target host or Unix Domain Socket pathname |
 | `header` | A 32 bit unsigned integer |
 | `timeout` | Timeout, in milliseconds, for connecting to the server |
+| `isUnixDomainSocket` | Boolean, indicating whether or not targetHost is a Unix Domain Socket |
 
 ## Usage:
 

@@ -24,6 +24,7 @@ module.exports = class IpcClient extends TCPBase {
    *  targetPort: 9999,
    *  timeout: 3000,
    *  header: 0xf2b49e2c,
+   *  isUnixDomainSocket: false,
    * }
    * @constructor
    */
@@ -31,12 +32,14 @@ module.exports = class IpcClient extends TCPBase {
   constructor(options) {
     if (typeof options.targetHost !== 'string')
       throw new Error("targetHost must be a string");
-    if (typeof options.targetPort !== 'number')
+    if (typeof options.targetPort !== 'number' && options.isUnixDomainSocket === false)
       throw new Error("targetPort must be a number");
     if (typeof options.timeout !== 'number')
       options.timeout = 3000;
     if (options.header === undefined)
       options.header = 0xf2b49e2c;
+    if (options.isUnixDomainSocket === true)
+      options.targetPort = "";
       
     super({
       host: options.targetHost, 

@@ -1,6 +1,11 @@
 # osc-ipc-client
 A client for sending and recieving messages to/from an Interprocess Connection. 
 
+## Install:
+```
+npm install osc-ipc-client
+```
+
 ## Constructor:
 ```javascript
 const IpcClient = require("osc-ipc-client");

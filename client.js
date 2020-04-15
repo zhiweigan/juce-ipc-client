@@ -76,7 +76,7 @@ module.exports = class IpcClient extends TCPBase {
   _sendPromise(toSend){
     return new Promise(resolve=>{
         this._socket.write(toSend, (err)=> {
-          if (err) console.error('Error sending message:', err, msgObject);
+          if (err) console.error('Error sending message:', toSend, err);
           resolve("sent")
         })
     })
@@ -95,7 +95,6 @@ module.exports = class IpcClient extends TCPBase {
     const size = Buffer.alloc(4);
     size.writeUInt32LE(messageContent.length);
 
-    console.log(messageContent, messageContent.length);
     const message = [header, size, messageContent];
     const toSend = Buffer.concat(message);
 

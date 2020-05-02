@@ -90,7 +90,7 @@ module.exports = class IpcClient extends TCPBase {
     const message = [header, size, messageContent];
     const toSend = Buffer.concat(message);
 
-    const sendPromise = function(toSend){
+    const sendPromise = (toSend) => {
       return new Promise((resolve, reject)=>{
           this._socket.write(toSend, (err)=> {
             if (err) reject(err);

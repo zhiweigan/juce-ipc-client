@@ -94,9 +94,9 @@ module.exports = class IpcClient extends TCPBase {
       return new Promise((resolve, reject)=>{
           this._socket.write(toSend, (err)=> {
             if (err) reject(err);
-            resolve("sent")
-          })
-      })
+            resolve("sent");
+          });
+      });
     }
 
     return await sendPromise(toSend);
@@ -124,9 +124,14 @@ module.exports = class IpcClient extends TCPBase {
     if (Buffer.isBuffer(msgObject) === false && typeof msgObject !== 'object')
       throw new Error("msgObject must be a valid object or buffer");
     
-    const messageContent = (msgObject instanceof Buffer)
-      ? msgObject
-      : osc.toBuffer(prepareObjectForOsc(msgObject, timetag));
-    return this.sendBuffer(messageContent);
+    try{
+      const messageContent = (msgObject instanceof Buffer)
+        ? msgObject
+        : osc.toBuffer(prepareObjectForOsc(msgObject, timetag));
+      return this.sendBuffer(messageContent);
+    }
+    catch (err){
+      return Promise.reject(err);
+    }
   }
 }
